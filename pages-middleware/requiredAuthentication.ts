@@ -2,15 +2,19 @@ import { signedCookies } from "cookie-parser";
 import { verify } from "jsonwebtoken";
 import { Request } from "express";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
+import { ParsedUrlQuery } from "querystring";
 // import { GetServerSidePropsResult } from "next";
 
-export const requiredAuthentication = (
+export const requiredAuthentication = <
+  P extends { [key: string]: any } = { [key: string]: any },
+  Q extends ParsedUrlQuery = ParsedUrlQuery
+>(
   cb: (
     d: object,
-    c: GetServerSidePropsContext
-  ) => Promise<GetServerSidePropsResult<any>>
+    c: GetServerSidePropsContext<Q>
+  ) => Promise<GetServerSidePropsResult<P>>
 ) => {
-  return async (context: GetServerSidePropsContext) => {
+  return async (context: GetServerSidePropsContext<Q>) => {
     const cookies = signedCookies(
       (context.req as Request).cookies,
       process.env.COOKIE_SECRET
