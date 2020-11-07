@@ -1,0 +1,29 @@
+query getUsers {
+  users {
+    ...UserFields
+  }
+}
+
+query getUser($userId: String!) {
+  user(userId: $userId) {
+    ...UserFields
+  }
+}
+
+query getSignedInUser($password: String!, $username: String!) {
+  signIn(user: { password: $password, username: $username }) {
+    ...UserFields
+  }
+}
+
+query getCurrentUser {
+  getCurrentUser {
+    ...UserFields
+  }
+}
+
+fragment UserFields on User {
+  _id
+  firstName
+  lastName
+}
