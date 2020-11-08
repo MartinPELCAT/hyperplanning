@@ -15,8 +15,8 @@ module.exports = {
         "light-gray": "#f7f8fd",
         "active-icon": "#b052b8",
       },
-      inset: {
-        "-4": "-1rem",
+      fontFamily: {
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },
