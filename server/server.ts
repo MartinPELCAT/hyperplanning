@@ -8,6 +8,7 @@ import cookieParser from "cookie-parser";
 import { parse } from "url";
 import AuthenticationResolver from "./src/resolvers/AuthenticationResolver";
 import UserResolver from "./src/resolvers/UserResolver";
+import RoomResolver from "./src/resolvers/RoomResolver";
 
 const nextApp = next({ dev: true });
 const handler = nextApp.getRequestHandler();
@@ -28,7 +29,7 @@ export const server = async () => {
      * Typegraphql setup
      */
     const schema = await buildSchema({
-      resolvers: [UserResolver, AuthenticationResolver],
+      resolvers: [UserResolver, AuthenticationResolver, RoomResolver],
       container: Container,
     });
 

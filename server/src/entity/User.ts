@@ -30,9 +30,10 @@ export class User extends AbstractBaseEntity {
     type: "enum",
     enum: [UserRole.ADMIN, UserRole.STUDENT, UserRole.TEACHER],
     nullable: true,
+    default: UserRole.STUDENT,
   })
-  @Field(() => [UserRole])
-  roles: UserRole[];
+  @Field(() => UserRole)
+  role: UserRole;
 
   @ManyToMany(() => Group)
   @Field(() => [Group])

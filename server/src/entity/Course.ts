@@ -1,5 +1,5 @@
 import { Field, ObjectType } from "type-graphql";
-import { Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne } from "typeorm";
 import AbstractBaseEntity from "./AbstractBaseEntity";
 import { Room } from "./Room";
 import { User } from "./User";
@@ -19,4 +19,11 @@ export class Course extends AbstractBaseEntity {
   @Field(() => User)
   @ManyToOne(() => User)
   teacher?: User;
+
+  @Column()
+  @Field()
+  totalHours: number;
+
+  @Field()
+  remainingHours: number;
 }

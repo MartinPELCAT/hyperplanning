@@ -5,7 +5,7 @@ import { InjectRepository } from "typeorm-typedi-extensions";
 import { User } from "../entity/User";
 import { SignInInput, SignUpInput } from "../inputs/User";
 import { ContextType } from "../types/ContextType";
-import { sign, verify } from "jsonwebtoken";
+import { sign } from "jsonwebtoken";
 
 @Resolver()
 export default class AuthenticationResolver {
@@ -50,15 +50,7 @@ export default class AuthenticationResolver {
   }
 
   @Query(() => User, { nullable: true })
-  async getCurrentUser(@Ctx() { req }: ContextType) {
-    const token = req.signedCookies["_token"];
-    if (!token) return null;
-    try {
-      verify(token, process.env.JWT_SECRET);
-      //TODO: Voir si il faut faire un truc ici
-    } catch (error) {
-      return null;
-    }
+  async getUserFromToken(@Arg("token", () => String!) token: string) {
     return await this.userRepository.findOne({
       where: { token },
     });

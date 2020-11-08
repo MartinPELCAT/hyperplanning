@@ -16,9 +16,10 @@ query getSignedInUser($password: String!, $username: String!) {
   }
 }
 
-query getCurrentUser {
-  getCurrentUser {
+query getUserFromToken($token: String!) {
+  getUserFromToken(token: $token) {
     ...UserFields
+    role
   }
 }
 

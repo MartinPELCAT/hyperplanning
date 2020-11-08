@@ -3,14 +3,23 @@ import { verify } from "jsonwebtoken";
 import { Request } from "express";
 import { GetServerSidePropsContext, GetServerSidePropsResult } from "next";
 import { ParsedUrlQuery } from "querystring";
-// import { GetServerSidePropsResult } from "next";
+import { client } from "apollo/client";
+import {
+  GetUserFromTokenDocument,
+  GetUserFromTokenQuery,
+  GetUserFromTokenQueryVariables,
+} from "@generated";
+
+const redirectPath = {
+  redirect: { destination: "/auth/signin", permanent: false },
+};
 
 export const requiredAuthentication = <
   P extends { [key: string]: any } = { [key: string]: any },
   Q extends ParsedUrlQuery = ParsedUrlQuery
 >(
   cb: (
-    d: object,
+    d: GetUserFromTokenQuery["getUserFromToken"],
     c: GetServerSidePropsContext<Q>
   ) => Promise<GetServerSidePropsResult<P>>
 ) => {
@@ -19,16 +28,26 @@ export const requiredAuthentication = <
       (context.req as Request).cookies,
       process.env.COOKIE_SECRET
     );
-    const decoded = !!cookies["_token"]
-      ? (verify(
-          cookies["_token"] ? cookies["_token"] : "",
-          process.env.JWT_SECRET
-        ) as object)
+    const token = cookies["_token"];
+
+    if (!!!token) return redirectPath;
+
+    const decoded = !!token
+      ? verify(token ? token : "", process.env.JWT_SECRET)
       : null;
 
-    if (!decoded)
-      return { redirect: { destination: "/auth/signin", permanent: false } };
+    if (!decoded) return redirectPath;
 
-    return cb(decoded, context);
+    const { data } = await client.query<
+      GetUserFromTokenQuery,
+      GetUserFromTokenQueryVariables
+    >({
+      query: GetUserFromTokenDocument,
+      variables: { token },
+    });
+
+    if (!!!data.getUserFromToken) return redirectPath;
+
+    return cb(data.getUserFromToken, context);
   };
 };

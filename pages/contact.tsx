@@ -16,6 +16,5 @@ export const getServerSideProps: GetServerSideProps<
   { propTest: string },
   { urlTest: string }
 > = requiredAuthentication(async (user) => {
-  console.log(user);
   return { props: { ...user, propTest: "ddsdad" } };
 });
