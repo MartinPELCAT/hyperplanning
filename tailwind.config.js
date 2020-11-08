@@ -11,7 +11,12 @@ module.exports = {
   theme: {
     extend: {
       backgroundColor: {
-        "dark-gray": "#212121",
+        "dark-blue": "#0e133b",
+        "light-gray": "#f7f8fd",
+        "active-icon": "#b052b8",
+      },
+      inset: {
+        "-4": "-1rem",
       },
     },
   },

@@ -1,4 +1,4 @@
-import Header from "@components/Header";
+import { NavBar as Header } from "@components/navbar/NavBar";
 import { GetServerSideProps } from "next";
 import React from "react";
 import { requiredAuthentication } from "pages-middleware/requiredAuthentication";

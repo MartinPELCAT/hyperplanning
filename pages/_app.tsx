@@ -6,7 +6,6 @@ import { client } from "apollo/client";
 import { AuthenticatedUserContextProvider } from "contexts/AuthenticatedUserContext";
 
 export default function App({ Component, pageProps }: AppProps) {
-  console.log(pageProps.authenticatedUser);
   return (
     <ApolloProvider client={client}>
       <AuthenticatedUserContextProvider
@@ -17,3 +16,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </ApolloProvider>
   );
 }
+
+//https://www.behance.net/gallery/107127041/WeCal?tracking_source=search_projects_recommended%7Ccalendar%20web
