@@ -9,6 +9,11 @@
     "gen": "graphql-codegen --config codegen.yml",
     "prestart": "brew services restart postgresql"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "@apollo/client": "^3.2.5",
     "@babel/core": "^7.12.3",
@@ -61,10 +66,5 @@
     "tailwindcss": "^1.9.6",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
   }
 }
