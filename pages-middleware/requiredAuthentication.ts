@@ -32,9 +32,7 @@ export const requiredAuthentication = <
 
     if (!!!token) return redirectPath;
 
-    const decoded = !!token
-      ? verify(token ? token : "", process.env.JWT_SECRET)
-      : null;
+    const decoded = verify(token, process.env.JWT_SECRET);
 
     if (!decoded) return redirectPath;
 
