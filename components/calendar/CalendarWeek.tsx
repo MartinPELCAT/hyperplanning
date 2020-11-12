@@ -6,10 +6,10 @@ export const CalendarWeek = () => {
   const { currentDay } = useCalendarContext();
   return (
     <div className="flex-1 flex">
-      {getDaysOfWeek(currentDay).map((day) => {
+      {getDaysOfWeek(currentDay).map((day, index) => {
         return (
-          <div key={day.getTime()} className="w-1/5">
-            <CalendarDay day={day} />
+          <div key={day.getTime()} className={"w-1/5"}>
+            <CalendarDay day={day} isFirst={index === 0} />
           </div>
         );
       })}

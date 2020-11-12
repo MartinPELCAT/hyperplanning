@@ -9,7 +9,7 @@ export const Calendar = () => {
     <>
       {view === "Day" ? (
         <div className="flex-1">
-          <CalendarDay day={currentDay} />
+          <CalendarDay day={currentDay} isFirst />
         </div>
       ) : (
         <CalendarWeek />
