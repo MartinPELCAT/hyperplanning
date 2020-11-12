@@ -1,5 +1,5 @@
 import { FC } from "react";
 
 export const DayCell: FC = ({ children }) => {
-  return <td className="h-10">{children}</td>;
+  return <div className="h-10">{children}</div>;
 };

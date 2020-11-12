@@ -5,14 +5,14 @@ import { CalendarDay } from "./CalendarDay";
 export const CalendarWeek = () => {
   const { currentDay } = useCalendarContext();
   return (
-    <tr>
+    <div className="flex-1 flex">
       {getDaysOfWeek(currentDay).map((day) => {
         return (
-          <td key={day.getTime()}>
+          <div key={day.getTime()} className="w-1/5">
             <CalendarDay day={day} />
-          </td>
+          </div>
         );
       })}
-    </tr>
+    </div>
   );
 };

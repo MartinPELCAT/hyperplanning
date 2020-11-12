@@ -8,16 +8,14 @@ export const CalendarDay = ({ day }: Props) => {
   const { intervalConfig } = useCalendarContext();
 
   return (
-    <table className="w-full border-collapse">
-      <tbody>
-        {getTimestampsBetween(day, intervalConfig).map((timestamp) => {
-          return (
-            <tr key={timestamp} className="border">
-              <DayCell>{timestamp}</DayCell>
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
+    <>
+      {getTimestampsBetween(day, intervalConfig).map((timestamp) => {
+        return (
+          <div key={timestamp} className="border-b border-r">
+            <DayCell></DayCell>
+          </div>
+        );
+      })}
+    </>
   );
 };
