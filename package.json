@@ -7,7 +7,8 @@
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
     "gen": "graphql-codegen --config codegen.yml",
-    "prestart": "brew services restart postgresql"
+    "prestart": "brew services restart postgresql",
+    "lint": "eslint ."
   },
   "husky": {
     "hooks": {

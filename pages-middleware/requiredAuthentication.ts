@@ -15,7 +15,7 @@ const redirectPath = {
 };
 
 export const requiredAuthentication = <
-  P extends { [key: string]: any } = { [key: string]: any },
+  P extends { [key: string]: unknown } = { [key: string]: unknown },
   Q extends ParsedUrlQuery = ParsedUrlQuery
 >(
   cb: (

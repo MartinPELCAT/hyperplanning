@@ -6,12 +6,12 @@ import Link from "next/link";
 export const WidgetView = () => {
   const { view } = useCalendarContext();
   const { query } = useRouter();
-  console.log(view);
 
   return (
     <div className="flex bg-white rounded-full font-bold shadow-md p-1/2">
       <Link href={{ query: { ...query, view: "Day" } }}>
         <div
+          role="button"
           className={clsx(
             [view === "Day" && "bg-active-icon text-white"],
             "flex-1 w-24 text-center rounded-full py-1"
@@ -22,6 +22,7 @@ export const WidgetView = () => {
       </Link>
       <Link href={{ query: { ...query, view: "Week" } }}>
         <div
+          role="button"
           className={clsx(
             [view === "Week" && "bg-active-icon text-white"],
             "flex-1 w-24 text-center rounded-full py-1"

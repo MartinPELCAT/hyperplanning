@@ -24,4 +24,12 @@ module.exports = {
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/prop-types": "off",
   },
+  overrides: [
+    {
+      files: ["apollo/__generated__/*.ts"],
+      rules: {
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+  ],
 };

@@ -19,7 +19,7 @@ export default function Home() {
         <div className="flex-1 flex flex-col bg-light-gray my-4 mr-4 rounded-3xl py-4 pr-4 pl-8">
           <div className="flex">
             <div className="flex-1 ml-8 font-bold text-5xl">Octobre</div>
-            <div className="my-auto flex space-x-20 mx-8">
+            <div className="my-auto flex space-x-20 ">
               <WidgetView />
               <WidgetDateNavigation />
             </div>

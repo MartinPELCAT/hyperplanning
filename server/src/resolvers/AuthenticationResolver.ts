@@ -50,7 +50,7 @@ export default class AuthenticationResolver {
   }
 
   @Query(() => User, { nullable: true })
-  async getUserFromToken(@Arg("token", () => String!) token: string) {
+  async getUserFromToken(@Arg("token", () => String) token: string) {
     return await this.userRepository.findOne({
       where: { token },
     });
