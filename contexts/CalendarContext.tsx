@@ -1,15 +1,23 @@
 import { format, isValid, parse } from "date-fns";
 import { useRouter } from "next/dist/client/router";
-import { createContext, FC, useEffect, useState } from "react";
-import { DATE_FORMAT_URL } from "utils/date-utils";
+import {
+  createContext,
+  Dispatch,
+  FC,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import { DateHourMinute, DATE_FORMAT_URL } from "utils/date-utils";
 
 type ViewType = "Week" | "Day";
 
 type ContextType = {
   currentDay: Date;
   view: ViewType;
-  setView: (view: ViewType) => void;
-  setCurrentDay: (date: Date) => void;
+  setView: Dispatch<SetStateAction<ViewType>>;
+  setCurrentDay: Dispatch<SetStateAction<Date>>;
+  intervalConfig: { start: DateHourMinute; end: DateHourMinute; step: number };
 };
 
 export const CalendarContext = createContext<{ calendar: ContextType }>(
@@ -52,6 +60,11 @@ export const CalendarContextProvider: FC = ({ children }) => {
           setCurrentDay,
           setView,
           view,
+          intervalConfig: {
+            start: { hour: 6, minutes: 0 },
+            end: { hour: 18, minutes: 0 },
+            step: 30,
+          },
         },
       }}
     >

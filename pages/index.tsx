@@ -14,18 +14,18 @@ export default function Home() {
       <Head>
         <title>Calendar</title>
       </Head>
-      <div className="min-h-screen bg-dark-blue antialiased font-poppins flex">
+      <div className="min-h-screen max-h-screen overflow-hidden bg-dark-blue antialiased font-poppins flex relative">
         <NavBar />
-        <div className="flex-1 flex flex-col bg-light-gray my-4 mr-4 rounded-3xl py-4 pr-4 pl-8">
-          <div className="flex">
+        <div className="flex-1 flex flex-col bg-light-gray my-4 mr-4 rounded-3xl py-4 pr-4 pl-8 overflow-auto box-content">
+          <div className="flex ">
             <div className="flex-1 ml-8 font-bold text-5xl">Octobre</div>
-            <div className="my-auto flex space-x-20 ">
+            <div className="my-auto mr-4 flex space-x-20 ">
               <WidgetView />
               <WidgetDateNavigation />
             </div>
           </div>
-          <div className="w-full flex h-full">
-            <div className="flex flex-1">
+          <div className="w-full flex h-full overflow-visible">
+            <div className="flex flex-1 overflow-visible">
               <Calendar />
             </div>
             <div className="w-64 mr-4 space-y-4">
