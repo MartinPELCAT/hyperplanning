@@ -3,7 +3,7 @@ import { GetServerSideProps } from "next";
 import React from "react";
 import { requiredAuthentication } from "pages-middleware/requiredAuthentication";
 
-export default function Contact(props: any) {
+export default function Contact(props) {
   return (
     <div>
       <Header />

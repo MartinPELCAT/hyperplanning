@@ -12,16 +12,16 @@ export const NavBar = () => {
       </div>
       {/* Icons groups */}
       <div className="relative my-6 space-y-6">
-        <NavItem active>
+        <NavItem to="/">
           <CalendarIcon className="mx-auto" />
         </NavItem>
-        <NavItem>
+        <NavItem to="/chat">
           <ChatIcon className="mx-auto" />
         </NavItem>
-        <NavItem>
+        <NavItem to="/search">
           <SearchIcon className="mx-auto" />
         </NavItem>
-        <NavItem>
+        <NavItem to="/settings">
           <SettingsIcon className="mx-auto" />
         </NavItem>
       </div>

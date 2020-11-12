@@ -30,7 +30,7 @@ export const requiredAuthentication = <
     );
     const token = cookies["_token"];
 
-    if (!!!token) return redirectPath;
+    if (!token) return redirectPath;
 
     const decoded = verify(token, process.env.JWT_SECRET);
 
@@ -44,7 +44,7 @@ export const requiredAuthentication = <
       variables: { token },
     });
 
-    if (!!!data.getUserFromToken) return redirectPath;
+    if (!data.getUserFromToken) return redirectPath;
 
     return cb(data.getUserFromToken, context);
   };

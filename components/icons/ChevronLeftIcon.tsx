@@ -6,10 +6,10 @@ export const ChevronLeftIcon = () => (
     width="24"
     height="24"
     stroke="currentColor"
-    stroke-width="2"
+    strokeWidth="2"
     fill="none"
-    stroke-linecap="round"
-    stroke-linejoin="round"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
     <polyline points="15 18 9 12 15 6"></polyline>
   </svg>

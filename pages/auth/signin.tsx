@@ -25,7 +25,7 @@ export default function SignIn() {
     mode: "all",
   });
   const usernameRef = useRef<HTMLInputElement>(null);
-  const [getUser, { loading, data }] = useGetSignedInUserLazyQuery();
+  const [getUser, { loading, data, error }] = useGetSignedInUserLazyQuery();
   const { push } = useRouter();
 
   useEffect(() => {
@@ -89,6 +89,11 @@ export default function SignIn() {
                   </span>
                 )}
               </div>
+              {error && (
+                <div className="text-sm text-white bg-red-400 rounded-md border-red-800 p-3 border leading-none">
+                  {error.message}
+                </div>
+              )}
               <div>
                 <button
                   type="submit"

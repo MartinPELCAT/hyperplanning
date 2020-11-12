@@ -10,7 +10,7 @@ export default class RoomResolver {
   ) {}
 
   @Query(() => Room, { nullable: true })
-  async getRoom(@Arg("roomId", () => String!) roomId: string) {
+  async getRoom(@Arg("roomId", () => String) roomId: string) {
     return this.roomRepository.findOne({ where: { _id: roomId } });
   }
 }
