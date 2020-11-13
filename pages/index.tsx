@@ -7,6 +7,7 @@ import { requiredAuthentication } from "pages-middleware/requiredAuthentication"
 import { WidgetView } from "@components/widget-view";
 import { WidgetDateNavigation } from "@components/widget-date-navigation";
 import Head from "next/head";
+import { WidgetMonth } from "@components/widget-month";
 
 export default function Home() {
   return (
@@ -18,7 +19,7 @@ export default function Home() {
         <NavBar />
         <div className="flex-1 flex flex-col bg-light-gray my-4 mr-4 rounded-3xl py-4 pr-4 pl-8 overflow-auto box-content">
           <div className="flex ">
-            <div className="flex-1 ml-8 font-bold text-5xl">Octobre</div>
+            <WidgetMonth />
             <div className="my-auto mr-4 flex space-x-20 ">
               <WidgetView />
               <WidgetDateNavigation />
@@ -29,7 +30,6 @@ export default function Home() {
               <Calendar />
             </div>
             <div className="w-64 mr-4 space-y-4 my-4">
-              <WidgetCalendar />
               <WidgetCalendar />
             </div>
           </div>

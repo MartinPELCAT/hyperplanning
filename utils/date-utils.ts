@@ -1,9 +1,11 @@
 import {
   addMinutes,
   eachDayOfInterval,
+  endOfMonth,
   endOfWeek,
   setHours,
   setMinutes,
+  startOfMonth,
   startOfWeek,
 } from "date-fns";
 
@@ -41,8 +43,18 @@ type Options = {
 
 export const getDaysOfWeek = (day: Date): Date[] => {
   const options: Options = { weekStartsOn: 1 };
-  return eachDayOfInterval({
-    start: startOfWeek(day, options),
-    end: endOfWeek(day, options),
-  });
+  const start = startOfWeek(day, options);
+  const end = endOfWeek(day, options);
+  return eachDayOfInterval({ start, end });
+};
+
+export const getWeeksOfMonth = (date: Date): Date[][] => {
+  const start = startOfWeek(startOfMonth(date), { weekStartsOn: 1 });
+  const end = endOfWeek(endOfMonth(date), { weekStartsOn: 1 });
+  const daysOfmonth = eachDayOfInterval({ start, end });
+
+  return Array(Math.ceil(daysOfmonth.length / 7))
+    .fill("")
+    .map((_, index) => index * 7)
+    .map((begin) => daysOfmonth.slice(begin, begin + 7));
 };
