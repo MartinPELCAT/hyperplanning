@@ -1,15 +1,18 @@
 import { useCalendarContext } from "hooks/useCalendarContext";
+import React from "react";
 import { getDaysOfWeek } from "utils/date-utils";
 import { CalendarDay } from "./CalendarDay";
+import { HoursColumn } from "./HoursColumn";
 
 export const CalendarWeek = () => {
   const { currentDay } = useCalendarContext();
   return (
     <div className="flex-1 flex">
-      {getDaysOfWeek(currentDay).map((day, index) => {
+      <HoursColumn />
+      {getDaysOfWeek(currentDay).map((day) => {
         return (
           <div key={day.getTime()} className={"w-1/5"}>
-            <CalendarDay day={day} isFirst={index === 0} />
+            <CalendarDay day={day} />
           </div>
         );
       })}
