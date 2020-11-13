@@ -108,7 +108,7 @@ export default function SignIn() {
                 <div className="float-right">
                   <Link href="/auth/forgot-password">
                     <a className="">
-                      <span className="text-sm text-blue-500 ">
+                      <span className="text-sm text-blue-500">
                         Forgot password ?
                       </span>
                     </a>
