@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { format, isSameDay, isToday } from "date-fns";
+import { format, isSameDay } from "date-fns";
 import { useCalendarContext } from "hooks/useCalendarContext";
 import { getTimestampsBetween } from "utils/date-utils";
 import { DayCell } from "./DayCell";
