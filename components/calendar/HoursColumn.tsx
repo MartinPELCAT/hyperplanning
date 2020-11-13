@@ -20,7 +20,7 @@ export const HoursColumn = () => {
             key={timestamp}
             className="border-r text-xs whitespace-no-wrap mb-px leading-none"
           >
-            <DayCell>{format(timestamp, "hh:mm a")}</DayCell>
+            <DayCell>{format(timestamp, "h:mm a")}</DayCell>
           </div>
         );
       })}
