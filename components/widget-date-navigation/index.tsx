@@ -11,6 +11,7 @@ export const WidgetDateNavigation = () => {
     <div className="my-auto flex w-64 justify-center space-x-1">
       <div
         className="my-auto"
+        role="button"
         onClick={() => setCurrentDay((day) => subDays(day, 1))}
       >
         <ChevronLeftIcon />
@@ -22,6 +23,7 @@ export const WidgetDateNavigation = () => {
       </div>
       <div
         className="my-auto"
+        role="button"
         onClick={() => setCurrentDay((day) => addDays(day, 1))}
       >
         <ChevronRightIcon />

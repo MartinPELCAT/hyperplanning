@@ -24,11 +24,11 @@ export default function Home() {
               <WidgetDateNavigation />
             </div>
           </div>
-          <div className="w-full flex h-full overflow-visible">
+          <div className="w-full flex overflow-visible">
             <div className="flex flex-1 overflow-visible px-4">
               <Calendar />
             </div>
-            <div className="w-64 mr-4 space-y-4">
+            <div className="w-64 mr-4 space-y-4 my-4">
               <WidgetCalendar />
               <WidgetCalendar />
             </div>
