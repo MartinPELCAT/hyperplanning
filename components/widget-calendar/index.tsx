@@ -1,6 +1,6 @@
 import { ChevronLeftIcon } from "@components/icons/ChevronLeftIcon";
 import { ChevronRightIcon } from "@components/icons/ChevronRightIcon";
-import { ButtonIcon } from "@components/shared/ButtonIcon";
+import { Button } from "@components/shared/Button";
 import { addMonths, format, getWeek, subMonths } from "date-fns";
 import { useCalendarContext } from "hooks/useCalendarContext";
 import { FC, useState } from "react";
@@ -14,15 +14,15 @@ export const WidgetCalendar: FC = () => {
   return (
     <div className="bg-white shadow rounded-3xl w-full overflow-hidden px-2 py-4 flex flex-col space-y-4">
       <div className="flex justify-between px-3 space-x-4 select-none">
-        <ButtonIcon onClick={() => setMonth((date) => subMonths(date, 1))}>
+        <Button onClick={() => setMonth((date) => subMonths(date, 1))}>
           <ChevronLeftIcon />
-        </ButtonIcon>
+        </Button>
         <span className="font-bold">
           {format(month, DATE_FORMAT.MONTH_YEAR)}
         </span>
-        <ButtonIcon onClick={() => setMonth((date) => addMonths(date, 1))}>
+        <Button onClick={() => setMonth((date) => addMonths(date, 1))}>
           <ChevronRightIcon />
-        </ButtonIcon>
+        </Button>
       </div>
       <div>
         {getWeeksOfMonth(month).map((week) => {

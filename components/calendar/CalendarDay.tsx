@@ -32,7 +32,7 @@ export const CalendarDay = ({ day }: Props) => {
       {getTimestampsBetween(day, intervalConfig).map((timestamp) => {
         return (
           <div key={timestamp} className="border-b border-r">
-            <DayCell></DayCell>
+            <DayCell />
           </div>
         );
       })}

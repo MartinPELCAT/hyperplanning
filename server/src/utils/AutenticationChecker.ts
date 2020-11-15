@@ -27,11 +27,9 @@ export const authChecker: AuthChecker<ContextType, RoleEnum> = async (
     if (!user) return false;
     const userRoles = await (user.roles as Promise<Role[]>);
 
-    const userFound = roles.some((role) => {
+    return roles.some((role) => {
       return userRoles.findIndex((usrRole) => usrRole.name === role) !== -1;
     });
-
-    return userFound ? true : false;
   } catch (error) {
     console.log(error);
     return false;

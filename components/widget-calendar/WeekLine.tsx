@@ -1,3 +1,4 @@
+import { Button } from "@components/shared/Button";
 import clsx from "clsx";
 import { format, isSameDay, isSameMonth, isSameWeek } from "date-fns";
 import { useCalendarContext } from "hooks/useCalendarContext";
@@ -21,10 +22,9 @@ export const WeekLine: FC<Props> = ({ weekDays, monthDisplayed }) => {
     >
       {weekDays.map((day) => {
         return (
-          <div
+          <Button
             key={day.getTime()}
             onClick={() => setCurrentDay(day)}
-            role="button"
             className={clsx(
               [
                 isSameMonth(day, monthDisplayed)
@@ -39,7 +39,7 @@ export const WeekLine: FC<Props> = ({ weekDays, monthDisplayed }) => {
             )}
           >
             {format(day, DATE_FORMAT.DAY_NUMBER)}
-          </div>
+          </Button>
         );
       })}
     </div>
