@@ -9,7 +9,10 @@ import { parse } from "url";
 import AuthenticationResolver from "./src/resolvers/AuthenticationResolver";
 import UserResolver from "./src/resolvers/UserResolver";
 import RoomResolver from "./src/resolvers/RoomResolver";
-import { seedsDataBase } from "./src/seeds";
+// import { seedsDataBase } from "./src/seeds";
+import { authChecker } from "./src/utils/AutenticationChecker";
+import cors from "cors";
+import { ContextType } from "./src/types/ContextType";
 
 const nextApp = next({ dev: true });
 const handler = nextApp.getRequestHandler();
@@ -20,14 +23,15 @@ export const server = async () => {
   return nextApp.prepare().then(async () => {
     const app = express();
     app.use(cookieParser(process.env.COOKIE_SECRET));
+
     /**
      * typeorm setup
      */
 
     await createConnection();
-    console.info("Seeding database");
 
-    await seedsDataBase();
+    console.info("Seeding database");
+    // await seedsDataBase();
 
     /**
      * Typegraphql setup
@@ -35,15 +39,19 @@ export const server = async () => {
     const schema = await buildSchema({
       resolvers: [UserResolver, AuthenticationResolver, RoomResolver],
       container: Container,
+      authChecker,
     });
+
+    app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 
     const apollo = new ApolloServer({
       schema,
-      context: async ({ req, res }) => {
+      context: async ({ req, res }): Promise<ContextType> => {
         return { res, req };
       },
     });
-    apollo.applyMiddleware({ path: "/api/gql", app });
+
+    apollo.applyMiddleware({ path: "/api/gql", app, cors: true });
     app.all("*", (req, res) => {
       const parsedUrl = parse(req.url, true);
       handler(req, res, parsedUrl);

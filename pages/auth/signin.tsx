@@ -23,6 +23,7 @@ export default function SignIn() {
   >({
     resolver: joiResolver(schema),
     mode: "all",
+    defaultValues: { password: "hophop", username: "pelcatm" },
   });
   const usernameRef = useRef<HTMLInputElement>(null);
   const [getUser, { loading, data, error }] = useGetSignedInUserLazyQuery();

@@ -17,11 +17,13 @@ export default class AuthenticationResolver {
   async signUp(
     @Arg("user") { firstName, lastName, password, username }: SignUpInput
   ): Promise<User> {
+    const token = sign(
+      { lastName, firstName, date: Date.now(), username },
+      process.env.JWT_SECRET
+    );
+
     const user = this.userRepository.create({
-      token: sign(
-        { lastName, firstName, date: Date.now(), username },
-        process.env.JWT_SECRET
-      ),
+      token,
       firstName,
       lastName,
       password,

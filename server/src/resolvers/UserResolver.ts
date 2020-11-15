@@ -1,7 +1,15 @@
-import { Arg, FieldResolver, Query, Resolver, Root } from "type-graphql";
+import {
+  Arg,
+  Authorized,
+  FieldResolver,
+  Query,
+  Resolver,
+  Root,
+} from "type-graphql";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions/decorators/InjectRepository";
 import { User } from "../entity/User";
+import { RoleEnum } from "../entity/UseRole";
 
 @Resolver(() => User)
 export default class UserResolver {
@@ -18,6 +26,7 @@ export default class UserResolver {
   }
 
   @Query(() => [User])
+  @Authorized<RoleEnum[]>([RoleEnum.ADMIN, RoleEnum.STUDENT])
   async users() {
     return this.userRepository.find();
   }

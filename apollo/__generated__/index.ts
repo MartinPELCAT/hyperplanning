@@ -111,14 +111,12 @@ export type GetUserFromTokenQueryVariables = Exact<{
 }>;
 
 export type GetUserFromTokenQuery = { __typename?: "Query" } & {
-  getUserFromToken?: Maybe<
-    { __typename?: "User" } & Pick<User, "roles"> & UserFieldsFragment
-  >;
+  getUserFromToken?: Maybe<{ __typename?: "User" } & UserFieldsFragment>;
 };
 
 export type UserFieldsFragment = { __typename?: "User" } & Pick<
   User,
-  "_id" | "firstName" | "lastName"
+  "_id" | "firstName" | "lastName" | "roles"
 >;
 
 export const UserFieldsFragmentDoc = gql`
@@ -126,6 +124,7 @@ export const UserFieldsFragmentDoc = gql`
     _id
     firstName
     lastName
+    roles
   }
 `;
 export const GetUsersDocument = gql`
@@ -288,7 +287,6 @@ export const GetUserFromTokenDocument = gql`
   query getUserFromToken($token: String!) {
     getUserFromToken(token: $token) {
       ...UserFields
-      roles
     }
   }
   ${UserFieldsFragmentDoc}

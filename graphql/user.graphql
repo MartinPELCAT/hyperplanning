@@ -19,7 +19,6 @@ query getSignedInUser($password: String!, $username: String!) {
 query getUserFromToken($token: String!) {
   getUserFromToken(token: $token) {
     ...UserFields
-    roles
   }
 }
 
@@ -27,4 +26,5 @@ fragment UserFields on User {
   _id
   firstName
   lastName
+  roles
 }

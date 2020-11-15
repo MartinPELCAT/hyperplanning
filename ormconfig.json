@@ -7,7 +7,6 @@
   "database": "hyperplanning",
   "synchronize": true,
   "logging": "all",
-  "dropSchema": true,
   "cache": true,
   "logger": "file",
   "entities": ["server/src/entity/**/*.{ts,js}"],
