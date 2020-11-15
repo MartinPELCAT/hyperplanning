@@ -8,7 +8,6 @@ import { NavItem } from "./NavItem";
 
 export const NavBar = () => {
   const { roles } = useAuthenticatedUser();
-  console.log(roles);
 
   return (
     <div className="w-24 flex flex-col py-2">

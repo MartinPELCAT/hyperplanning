@@ -8,7 +8,6 @@ import { WidgetView } from "@components/widget-view";
 import { WidgetDateNavigation } from "@components/widget-date-navigation";
 import Head from "next/head";
 import { WidgetMonth } from "@components/widget-month";
-import { useGetUsersQuery } from "apollo/__generated__";
 
 export default function Home() {
   return (

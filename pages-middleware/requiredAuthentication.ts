@@ -10,8 +10,18 @@ import {
   GetUserFromTokenQueryVariables,
 } from "@generated";
 
-const redirectPath = {
-  redirect: { destination: "/auth/signin", permanent: false },
+const redirectPath = (
+  redirectUrl: string
+): { redirect: { destination: string; permanent: boolean } } => {
+  return {
+    redirect: {
+      destination:
+        redirectUrl === "/"
+          ? "/auth/signin"
+          : `/auth/signin?redirect_to=${encodeURIComponent(redirectUrl)}`,
+      permanent: false,
+    },
+  };
 };
 
 export const requiredAuthentication = <
@@ -30,11 +40,11 @@ export const requiredAuthentication = <
     );
     const token = cookies["_token"];
 
-    if (!token) return redirectPath;
+    if (!token) return redirectPath(context.req.url);
 
     const decoded = verify(token, process.env.JWT_SECRET);
 
-    if (!decoded) return redirectPath;
+    if (!decoded) return redirectPath(context.req.url);
 
     const { data } = await client.query<
       GetUserFromTokenQuery,
@@ -44,7 +54,7 @@ export const requiredAuthentication = <
       variables: { token },
     });
 
-    if (!data.getUserFromToken) return redirectPath;
+    if (!data.getUserFromToken) return redirectPath(context.req.url);
 
     return cb(data.getUserFromToken, context);
   };

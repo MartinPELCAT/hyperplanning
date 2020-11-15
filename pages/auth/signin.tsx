@@ -6,6 +6,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useGetSignedInUserLazyQuery } from "apollo/__generated__";
 import { useRouter } from "next/dist/client/router";
+import { useAuthenticatedUser } from "hooks/useAuthenticatedUser";
 
 type LoginFormSchema = {
   username: string;
@@ -27,14 +28,18 @@ export default function SignIn() {
   });
   const usernameRef = useRef<HTMLInputElement>(null);
   const [getUser, { loading, data, error }] = useGetSignedInUserLazyQuery();
-  const { push } = useRouter();
+  const { push, query } = useRouter();
+  const { setUser } = useAuthenticatedUser();
 
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
 
   useEffect(() => {
-    data && push("/");
+    if (data) {
+      setUser(data.signIn);
+      push(decodeURIComponent((query?.redirect_to as string) ?? "") ?? "/");
+    }
   }, [data]);
 
   const onSubmit = ({ password, username }: LoginFormSchema) => {
