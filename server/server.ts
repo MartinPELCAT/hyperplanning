@@ -9,6 +9,7 @@ import { parse } from "url";
 import AuthenticationResolver from "./src/resolvers/AuthenticationResolver";
 import UserResolver from "./src/resolvers/UserResolver";
 import RoomResolver from "./src/resolvers/RoomResolver";
+import { seedsDataBase } from "./src/seeds";
 
 const nextApp = next({ dev: true });
 const handler = nextApp.getRequestHandler();
@@ -24,6 +25,9 @@ export const server = async () => {
      */
 
     await createConnection();
+    console.info("Seeding database");
+
+    await seedsDataBase();
 
     /**
      * Typegraphql setup

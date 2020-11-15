@@ -1,8 +1,18 @@
+import { hash } from "bcrypt";
+import { sign } from "jsonwebtoken";
 import { Field, ObjectType } from "type-graphql";
-import { Entity, Column, ManyToMany, Index } from "typeorm";
+import {
+  Entity,
+  Column,
+  ManyToMany,
+  Index,
+  BeforeInsert,
+  JoinTable,
+} from "typeorm";
+import { Lazy } from "../types/types";
 import AbstractBaseEntity from "./AbstractBaseEntity";
 import { Group } from "./Group";
-import { UserRole } from "./UseRole";
+import { Role } from "./UseRole";
 
 @Entity()
 @ObjectType({ description: "General database" })
@@ -26,16 +36,22 @@ export class User extends AbstractBaseEntity {
   @Column({ unique: true })
   token: string;
 
-  @Column({
-    type: "enum",
-    enum: [UserRole.ADMIN, UserRole.STUDENT, UserRole.TEACHER],
-    nullable: true,
-    default: UserRole.STUDENT,
-  })
-  @Field(() => UserRole)
-  role: UserRole;
+  @ManyToMany(() => Role, { lazy: true })
+  @JoinTable()
+  @Field(() => [String], { nullable: true })
+  roles?: Lazy<Role[]>;
 
   @ManyToMany(() => Group)
-  @Field(() => [Group])
   groups: Group[];
+
+  @BeforeInsert()
+  async beforeInset() {
+    const { lastName, firstName, username, password } = this;
+    this.token = sign(
+      { lastName, firstName, date: Date.now(), username },
+      process.env.JWT_SECRET
+    );
+
+    this.password = await hash(password, 4);
+  }
 }

@@ -1,9 +1,9 @@
-import { Arg, Query, Resolver } from "type-graphql";
+import { Arg, FieldResolver, Query, Resolver, Root } from "type-graphql";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions/decorators/InjectRepository";
 import { User } from "../entity/User";
 
-@Resolver()
+@Resolver(() => User)
 export default class UserResolver {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>
@@ -19,6 +19,11 @@ export default class UserResolver {
 
   @Query(() => [User])
   async users() {
-    return [];
+    return this.userRepository.find();
+  }
+
+  @FieldResolver()
+  async roles(@Root() { roles }: User): Promise<string[]> {
+    return (await roles).map((role) => role.name);
   }
 }

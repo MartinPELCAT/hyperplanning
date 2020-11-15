@@ -1,9 +1,16 @@
-import { registerEnumType } from "type-graphql";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-export enum UserRole {
+export enum RoleEnum {
   STUDENT = "STUDENT",
   TEACHER = "TEACHER",
   ADMIN = "ADMIN",
 }
 
-registerEnumType(UserRole, { name: "UserRole" });
+@Entity()
+export class Role {
+  @PrimaryGeneratedColumn({ type: "bigint" })
+  _id: number;
+
+  @Column()
+  name: string;
+}

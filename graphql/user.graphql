@@ -19,7 +19,7 @@ query getSignedInUser($password: String!, $username: String!) {
 query getUserFromToken($token: String!) {
   getUserFromToken(token: $token) {
     ...UserFields
-    role
+    roles
   }
 }
 

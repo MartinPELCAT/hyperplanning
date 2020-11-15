@@ -50,24 +50,7 @@ export type User = {
   firstName: Scalars["String"];
   lastName: Scalars["String"];
   username: Scalars["String"];
-  role: UserRole;
-  groups: Array<Group>;
-};
-
-export enum UserRole {
-  Student = "STUDENT",
-  Teacher = "TEACHER",
-  Admin = "ADMIN",
-}
-
-export type Group = {
-  __typename?: "Group";
-  _id: Scalars["String"];
-  createdAt: Scalars["DateTime"];
-  updatedAt: Scalars["DateTime"];
-  deletedAt: Scalars["DateTime"];
-  name: Scalars["String"];
-  users: Array<User>;
+  roles?: Maybe<Array<Scalars["String"]>>;
 };
 
 export type SignInInput = {
@@ -129,7 +112,7 @@ export type GetUserFromTokenQueryVariables = Exact<{
 
 export type GetUserFromTokenQuery = { __typename?: "Query" } & {
   getUserFromToken?: Maybe<
-    { __typename?: "User" } & Pick<User, "role"> & UserFieldsFragment
+    { __typename?: "User" } & Pick<User, "roles"> & UserFieldsFragment
   >;
 };
 
@@ -305,7 +288,7 @@ export const GetUserFromTokenDocument = gql`
   query getUserFromToken($token: String!) {
     getUserFromToken(token: $token) {
       ...UserFields
-      role
+      roles
     }
   }
   ${UserFieldsFragmentDoc}
