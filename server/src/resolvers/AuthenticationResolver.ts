@@ -1,4 +1,4 @@
-import { compare, hash } from "bcrypt";
+import { compare } from "bcrypt";
 import { Arg, Ctx, Mutation, Query, Resolver } from "type-graphql";
 import { Repository } from "typeorm";
 import { InjectRepository } from "typeorm-typedi-extensions";
@@ -17,7 +17,6 @@ export default class AuthenticationResolver {
   async signUp(
     @Arg("user") { firstName, lastName, password, username }: SignUpInput
   ): Promise<User> {
-    const encryptedPassword = await hash(password, 4);
     const user = this.userRepository.create({
       token: sign(
         { lastName, firstName, date: Date.now(), username },
@@ -25,7 +24,7 @@ export default class AuthenticationResolver {
       ),
       firstName,
       lastName,
-      password: encryptedPassword,
+      password,
       username,
     });
     return await user.save();
