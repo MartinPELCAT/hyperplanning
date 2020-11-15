@@ -9,7 +9,7 @@ import { parse } from "url";
 import AuthenticationResolver from "./src/resolvers/AuthenticationResolver";
 import UserResolver from "./src/resolvers/UserResolver";
 import RoomResolver from "./src/resolvers/RoomResolver";
-// import { seedsDataBase } from "./src/seeds";
+import { seedsDataBase } from "./src/seeds";
 import { authChecker } from "./src/utils/AutenticationChecker";
 import cors from "cors";
 import { ContextType } from "./src/types/ContextType";
@@ -31,7 +31,7 @@ export const server = async () => {
     await createConnection();
 
     console.info("Seeding database");
-    // await seedsDataBase();
+    await seedsDataBase();
 
     /**
      * Typegraphql setup

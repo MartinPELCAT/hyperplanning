@@ -1,3 +1,5 @@
+import { DashboardIcon } from "@components/icons/DashboardIcon";
+import { useAuthenticatedUser } from "hooks/useAuthenticatedUser";
 import { CalendarIcon } from "../icons/CalendarIcon";
 import { ChatIcon } from "../icons/ChatIcon";
 import { SearchIcon } from "../icons/SearchIcon";
@@ -5,6 +7,9 @@ import { SettingsIcon } from "../icons/SettingsIcon";
 import { NavItem } from "./NavItem";
 
 export const NavBar = () => {
+  const { roles } = useAuthenticatedUser();
+  console.log(roles);
+
   return (
     <div className="w-24 flex flex-col py-2">
       <div className="w-16 h-16 bg-white rounded-full mx-auto mt-10">
@@ -15,6 +20,11 @@ export const NavBar = () => {
         <NavItem to="/">
           <CalendarIcon className="mx-auto" />
         </NavItem>
+        {roles?.includes("ADMIN") && (
+          <NavItem to="/admin">
+            <DashboardIcon className="mx-auto" />
+          </NavItem>
+        )}
         <NavItem to="/chat">
           <ChatIcon className="mx-auto" />
         </NavItem>
