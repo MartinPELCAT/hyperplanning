@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { format, isSameDay } from "date-fns";
 import { useCalendarContext } from "hooks/useCalendarContext";
-import { getTimestampsBetween } from "utils/date-utils";
+import { DATE_FORMAT, getTimestampsBetween } from "utils/date-utils";
 import { DayCell } from "./DayCell";
 
 type Props = { day: Date };
@@ -23,7 +23,9 @@ export const CalendarDay = ({ day }: Props) => {
         >
           <div className="m-auto flex flex-col leading-none">
             <span className="text-center">{day.getDate()}</span>
-            <span className="text-sm font-thin">{format(day, "iii")}</span>
+            <span className="text-sm font-thin">
+              {format(day, DATE_FORMAT.DAY_SHORTTEXT)}
+            </span>
           </div>
         </div>
       </div>

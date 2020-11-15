@@ -1,5 +1,4 @@
 import { useCalendarContext } from "hooks/useCalendarContext";
-import React from "react";
 import { getDaysOfWeek } from "utils/date-utils";
 import { CalendarDay } from "./CalendarDay";
 import { HoursColumn } from "./HoursColumn";

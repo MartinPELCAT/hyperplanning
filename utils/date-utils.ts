@@ -9,9 +9,15 @@ import {
   startOfWeek,
 } from "date-fns";
 
-export const DATE_FORMAT_URL = "dd-MM-yyyy";
-
-export const DATE_FORMAT_FRIENDLY = "dd / MM / yyyy";
+export const DATE_FORMAT = {
+  URL: "dd-MM-yyyy",
+  DATE_SLASH: "dd / MM / yyyy",
+  MONTH_YEAR: "MMMM yyyy",
+  DAY_SHORTTEXT: "iii",
+  HOURS_MINUTES: "h:mm a",
+  DAY_NUMBER: "d",
+  MONTH_FULLTEXT: "MMMM",
+};
 
 export type DateHourMinute = { hour: number; minutes: number };
 

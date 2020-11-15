@@ -8,7 +8,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { DateHourMinute, DATE_FORMAT_URL } from "utils/date-utils";
+import { DateHourMinute, DATE_FORMAT } from "utils/date-utils";
 
 type ViewType = "Week" | "Day";
 
@@ -34,10 +34,10 @@ export const CalendarContextProvider: FC = ({ children }) => {
   const [currentDay, setCurrentDay] = useState<Date>(() => {
     if (
       typeof query.date !== "string" ||
-      !isValid(parse(query.date, DATE_FORMAT_URL, new Date()))
+      !isValid(parse(query.date, DATE_FORMAT.URL, new Date()))
     )
       return new Date();
-    return parse(query.date, DATE_FORMAT_URL, new Date());
+    return parse(query.date, DATE_FORMAT.URL, new Date());
   });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export const CalendarContextProvider: FC = ({ children }) => {
 
   useEffect(() => {
     replace({
-      query: { view, date: format(currentDay, DATE_FORMAT_URL) },
+      query: { view, date: format(currentDay, DATE_FORMAT.URL) },
     });
   }, [currentDay, view]);
 

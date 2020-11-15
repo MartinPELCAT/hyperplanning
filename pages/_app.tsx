@@ -1,5 +1,4 @@
 import { AppProps } from "next/app";
-import React from "react";
 import "../styles/tailwind.css";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "apollo/client";

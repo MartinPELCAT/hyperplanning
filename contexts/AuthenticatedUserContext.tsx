@@ -1,5 +1,5 @@
 import { GetUserFromTokenQuery } from "apollo/__generated__";
-import React, { createContext, FC, useState } from "react";
+import { createContext, FC, useState } from "react";
 
 type AuthenticatedUserType = GetUserFromTokenQuery["getUserFromToken"];
 

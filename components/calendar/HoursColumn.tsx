@@ -1,8 +1,7 @@
 import clsx from "clsx";
 import { useCalendarContext } from "hooks/useCalendarContext";
 import { format } from "date-fns";
-import React from "react";
-import { getTimestampsBetween } from "utils/date-utils";
+import { DATE_FORMAT, getTimestampsBetween } from "utils/date-utils";
 import { DayCell } from "./DayCell";
 
 export const HoursColumn = () => {
@@ -20,7 +19,7 @@ export const HoursColumn = () => {
             key={timestamp}
             className="border-r text-xs whitespace-no-wrap mb-px leading-none"
           >
-            <DayCell>{format(timestamp, "h:mm a")}</DayCell>
+            <DayCell>{format(timestamp, DATE_FORMAT.HOURS_MINUTES)}</DayCell>
           </div>
         );
       })}

@@ -1,38 +1,36 @@
 import { ChevronLeftIcon } from "@components/icons/ChevronLeftIcon";
 import { ChevronRightIcon } from "@components/icons/ChevronRightIcon";
+import { ButtonIcon } from "@components/shared/ButtonIcon";
 import { addMonths, format, getWeek, subMonths } from "date-fns";
 import { useCalendarContext } from "hooks/useCalendarContext";
-import { FC } from "react";
-import { getWeeksOfMonth } from "utils/date-utils";
+import { FC, useState } from "react";
+import { DATE_FORMAT, getWeeksOfMonth } from "utils/date-utils";
 import { WeekLine } from "./WeekLine";
 
 export const WidgetCalendar: FC = () => {
-  const { currentDay, setCurrentDay } = useCalendarContext();
+  const { currentDay } = useCalendarContext();
+  const [month, setMonth] = useState(currentDay);
 
   return (
     <div className="bg-white shadow rounded-3xl w-full overflow-hidden px-2 py-4 flex flex-col space-y-4">
       <div className="flex justify-between px-3 space-x-4 select-none">
-        <div
-          role="button"
-          onClick={() => setCurrentDay((date) => subMonths(date, 1))}
-        >
+        <ButtonIcon onClick={() => setMonth((date) => subMonths(date, 1))}>
           <ChevronLeftIcon />
-        </div>
-        <span className="font-bold">{format(currentDay, "MMMM yyyy")}</span>
-        <div
-          role="button"
-          onClick={() => setCurrentDay((date) => addMonths(date, 1))}
-        >
+        </ButtonIcon>
+        <span className="font-bold">
+          {format(month, DATE_FORMAT.MONTH_YEAR)}
+        </span>
+        <ButtonIcon onClick={() => setMonth((date) => addMonths(date, 1))}>
           <ChevronRightIcon />
-        </div>
+        </ButtonIcon>
       </div>
       <div>
-        {getWeeksOfMonth(currentDay).map((week) => {
+        {getWeeksOfMonth(month).map((week) => {
           return (
             <WeekLine
               key={getWeek(week[0], { weekStartsOn: 1 })}
               weekDays={week}
-              monthDisplayed={currentDay}
+              monthDisplayed={month}
             />
           );
         })}

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useRouter } from "next/dist/client/router";
 import Link from "next/link";
-import React, { FC } from "react";
+import { FC } from "react";
 
 type Props = { to: string };
 
